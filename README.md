@@ -1,46 +1,19 @@
-# Advanced Sample Hardhat Project
+# Flashloans4Good: A liquidation protection platform built to serve mainstream borrowers.  
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+# Project Overview
+One of the biggest problems in decentralised finance (DeFi) today is market volatility which can lead to costly liquidations and hence the loss of money.
+Flashloans4Good uses flash loans as a force for good to protect that money by minimising collateral losses from costly liquidations. These users want to utilise DeFi to borrow with the goal of improving their lives in some way. They take on good debt such as to pay for education, fund a business, or own a home.  We strongly believe that by simplifying the user experience and by minimising collateral losses due to liquidations this can help to drive the mass adoption of DeFi.  
 
-The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
+# Architecture 
+![Architecture Diagram](https://github.com/sianliu/flashloan_protection_platform/blob/4ce93ef2f70e3be748435d836138fb9974f4c5b3/diagrams/architecture_diagram_v1.0.jpg)
 
-Try running some of the following tasks:
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-npx hardhat help
-REPORT_GAS=true npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/deploy.ts
-TS_NODE_FILES=true npx ts-node scripts/deploy.ts
-npx eslint '**/*.{js,ts}'
-npx eslint '**/*.{js,ts}' --fix
-npx prettier '**/*.{json,sol,md}' --check
-npx prettier '**/*.{json,sol,md}' --write
-npx solhint 'contracts/**/*.sol'
-npx solhint 'contracts/**/*.sol' --fix
-```
 
-# Etherscan verification
+# Build & Run platform (locally)
 
-To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
 
-In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
+# Deploy to Optimism
 
-```shell
-hardhat run --network ropsten scripts/deploy.ts
-```
 
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
+# Testing procedure 
 
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
-```
-
-# Performance optimizations
-
-For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
