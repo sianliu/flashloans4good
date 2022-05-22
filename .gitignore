@@ -1,0 +1,12 @@
+artifacts
+cache
+*.swp
+node_modules
+tags
+build
+dist
+**/build
+.DS_STORE
+tags.*
+**/.env
+credentials.json
