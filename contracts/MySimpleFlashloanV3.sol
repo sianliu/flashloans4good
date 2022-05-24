@@ -2,10 +2,6 @@
 pragma solidity 0.8.10;
 pragma experimental ABIEncoderV2;
 
-
-// import {
-//   IPoolAddressesProvider
-// } from "https://github.com/aave/aave-v3-core/contracts/interfaces/IPoolAddressesProvider.sol";
 import {
     IPoolAddressesProvider
 } from "@aave/core-v3/contracts/interfaces/IPoolAddressesProvider.sol";
@@ -64,15 +60,17 @@ contract MySimpleFlashLoanV3 is FlashLoanSimpleReceiverBase {
 
         //
         // This contract now has the funds requested.
-        // Your logic goes here.
-        //
+        // Business logic - note: assume subscriber has a debt position opened on Aave, deposited <= 1ETH, and collateralised. 
 
-        // At the end of your logic above, this contract owes
-        // the flashloaned amounts + premiums.
-        // Therefore ensure your contract has enough to repay
-        // these amounts.
+        // 1. MaxBorrow USDC from AaveV3 
+        // 2. (Manually monitor health score for demo) Run script to cause health score to drop to liquidation threshold subscriber set
+        // 3. Execute flashLoanSimple
+        // 4. Repay portion of subscriber's loan to boost health score with aUSDC
+        // 5. Transfer collected collateral to subscribers wallet (Collateral - transaction fees)  
+        // 6. Repay to Aave (Collateral Balance - flashloaned amount + premium). Note: ensure enough funds in contract
+        
 
-        // Approve the LendingPool contract allowance to *pull* the owed amount
+        // Step 6. Approve the LendingPool contract allowance to *pull* the owed amount
         uint amountOwed = amount.add(premium);
         FAUCET.mint(asset,premium);
         IERC20(asset).approve(address(POOL), amountOwed);
@@ -80,6 +78,7 @@ contract MySimpleFlashLoanV3 is FlashLoanSimpleReceiverBase {
         return true;
     }
 
+    // This function is executed in Remix - specify address (eg. USDC smart contract address, amount)
     function executeFlashLoan(
         address asset,
         uint256 amount
